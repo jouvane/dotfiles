@@ -46,7 +46,8 @@
 [gui]
  gcwarning = false
 [commit]
- gpgsign = true
+ #gpgsign = true
+ gpgsign = false
 [core]
  #pager = diff-so-fancy | less --tabs=4 -RFX
  pager = delta --dark
