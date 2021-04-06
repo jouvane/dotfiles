@@ -184,7 +184,6 @@ mocha
 nodemon
 npmrc
 pm2
-tldr
 trash-cli
 typescript
 vtop
@@ -251,11 +250,21 @@ if [ -f $HOME/.cargo/env ]; then
   source "$HOME/.cargo/env"
   # rust/cargo
   CRATES_INSTALLED=`cargo install --list | cut -f1 -d' ' | awk 'NF'`
-  CRATES_TO_INSTALL="cargo-update
+  # todo: how to work with as-tree, which is not on crates.io?
+  # https://github.com/jez/as-tree
+  CRATES_TO_INSTALL="bandwhich
+  cargo-update
   cargo-edit
   cargo-expand
   cross
-  gping"
+  du-dust
+  fd-find
+  gping
+  grex
+  procs
+  ripgrep
+  tealdeer
+  tokei"
   CRATES_NOT_INSTALLED=`comm -23 <(sort <(echo "$CRATES_TO_INSTALL")) <(sort <(echo "$CRATES_INSTALLED"))`
   if [ "$CRATES_NOT_INSTALLED" != "" ]; then
     echo -e "\e[34mInstall crates $CRATES_NOT_INSTALLED.\e[0m"
