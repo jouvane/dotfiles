@@ -3,13 +3,13 @@
 	url = https://github.com/anishathalye/dotbot
 [submodule "bashscripts"]
 	path = bashscripts
-	url = ../bashscripts.git
+	url = https://github.com/giggio/bashscripts.git
 [submodule "poshfiles"]
 	path = poshfiles
-	url = ../poshfiles.git
+	url = https://github.com/giggio/poshfiles.git
 [submodule "vimfiles"]
 	path = vimfiles
-	url = ../vimfiles.git
+	url = https://github.com/giggio/vimfiles.git
 [submodule "tools/bash-it"]
 	path = tools/bash-it
 	url = https://github.com/Bash-it/bash-it.git
@@ -33,4 +33,4 @@
 	url = https://github.com/tfutils/tfenv.git
 [submodule "nvim"]
 	path = nvim
-	url = ../nvimfiles.git
+	url = https://github.com/giggio/nvimfiles.git
