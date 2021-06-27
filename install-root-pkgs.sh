@@ -73,6 +73,11 @@ addKey () {
   wget -q -O - $1 | apt-key add -
 }
 
+WSL=false
+if grep [Mm]icrosoft /proc/version > /dev/null; then
+  WSL=true
+fi
+
 REPOS=`apt-cache policy | grep http | awk '{print $2"/dists/"$3}' | sort -u`
 printf -v REPOS $"$REPOS\n"
 if [ "$REPOS" == "" ] || $UPDATE; then
@@ -92,6 +97,7 @@ wget
 gnupg
 gnupg-agent
 gnupg2
+silversearcher-ag
 software-properties-common" | sort`
 APT_PKGS_NOT_INSTALLED=`comm -23 <(echo "$APT_PKGS_TO_INSTALL") <(echo "$APT_PKGS_INSTALLED")`
 if [ "$APT_PKGS_NOT_INSTALLED" != "" ]; then
@@ -414,11 +420,6 @@ else
   fi
 fi
 
-# terraform - todo: remove this after a while, it is clean up from the previous installation
-echo -e "\e[34mUninstall Terraform (we're using tfenv now).\e[0m"
-rm -f /usr/local/bin/terraform012 /usr/local/bin/terraform013
-update-alternatives --remove-all terraform || true
-
 # terraform lint - tflint
 if ! hash tflint 2>/dev/null || $UPDATE; then
   echo -e "\e[34mInstall TFLint.\e[0m"
@@ -506,6 +507,24 @@ if ! hash iperf3 2>/dev/null || $UPDATE; then
 else
   if $VERBOSE; then
     echo "Not installing iperf3, it is already installed."
+  fi
+fi
+
+# k3d
+if ! hash k3d 2>/dev/null || $UPDATE; then
+  curl -s https://raw.githubusercontent.com/rancher/k3d/main/install.sh | bash
+else
+  if $VERBOSE; then
+    echo "Not installing k3d, it is already installed."
+  fi
+fi
+
+# starship
+if ! hash starship 2>/dev/null || $UPDATE; then
+  sh -c "$(curl -fsSL https://starship.rs/install.sh)" -- --yes
+else
+  if $VERBOSE; then
+    echo "Not installing Starship, it is already installed."
   fi
 fi
 
